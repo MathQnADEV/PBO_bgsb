@@ -1,18 +1,17 @@
 <template>
     <q-page class="q-pa-md">
-        <div class="q-mx-xl" style="max-width: 1300px; margin: 0 auto">
-            <q-card flat class="row q-gutter-md">
-                <q-card-section
-                    class="col-5 text-center"
-                    style="margin-top: 10rem"
-                >
+        <div class="q-mx-xl" style="max-width: 1300px; margin: auto; margin-top: 13%;">
+            <q-card flat class="row q-gutter">
+                <q-card-section class="col text-center">
                     <p v-html="profile.biodata"></p>
                 </q-card-section>
-                <img
-                    class="col-5"
-                    :src="/storage/ + profile.gambar"
-                    alt="tau"
-                />
+                <div class="col text-center">
+                    <img
+                        style="width: 70%"
+                        :src="/storage/ + profile.gambar"
+                        alt="tau"
+                    />
+                </div>
             </q-card>
             <q-btn
                 v-if="$page.props.auth.user"
@@ -125,4 +124,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

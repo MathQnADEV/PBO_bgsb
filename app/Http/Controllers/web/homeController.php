@@ -82,17 +82,15 @@ class homeController extends Controller
 
         $profile = profile::first();
 
-        $imageFilename = $profile->gambar;
+        $imageFilename = $request->gambar;
 
         if($imageFilename){
+            $gambar = $request->file('gambar')->store('profile', 'public');
             if (Storage::disk('public')->exists($imageFilename)){
                 Storage::disk('public')->delete($imageFilename);
-                $gambar = $request->file('gambar')->store('profile', 'public');
-            }else{
-                $gambar = $request->file('gambar')->store('profile', 'public');
             }
         }else{
-            $gambar = $request->file('gambar')->store('profile', 'public');
+            $gambar = $profile->gambar;
         }
 
         if($profile){
