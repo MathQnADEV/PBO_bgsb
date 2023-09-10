@@ -19,6 +19,7 @@
                     </Link>
                     <Link href="/profile" as="q-tab">
                         <q-tab
+                         v-if="$page.props.auth.user"
                             name="profile"
                             label="Profile"
                             icon="account_circle"

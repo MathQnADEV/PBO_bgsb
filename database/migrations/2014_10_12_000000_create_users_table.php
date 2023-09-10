@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('username');
             $table->string('email');
             $table->string('password');
-            $table->text('gambar')->nullable();
-            $table->text('biodata')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', [homeController::class,'show'])->name('login');
-Route::get('/profile', [homeController::class, 'profile']);
 Route::post('/register', [homeController::class, 'registerPost']);
 Route::post('/login', [loginController::class, 'login']);
 Route::get('/logout', [loginController::class, 'logout']);
@@ -34,7 +33,10 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/user/simpan',[homeController::class, 'userPost']);
     Route::get('/user/edit/{id}',[homeController::class, 'userEdit']);
     Route::delete('/user/hapus/{id}',[homeController::class, 'userHapus']);
+
     Route::get('/profile/edit', [homeController::class, 'profileEditShow']);
+    Route::get('/profile', [homeController::class, 'profile']);
+    
     Route::post('/user/profileSimpan/', [homeController::class, 'userBioSimpan']);
 
     Route::get('/berita',[beritaController::class, 'index']);

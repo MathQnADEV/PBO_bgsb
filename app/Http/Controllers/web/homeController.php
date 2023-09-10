@@ -66,21 +66,31 @@ class homeController extends Controller
     }
 
     public function profile(){
-        $data = profile::first();
-        return inertia::render('profile', [
-            'profile' => $data
-        ]);
+
+        $profile = profile::where('id', Auth::user()->id)->first();
+        if($profile){
+            return inertia::render('profile', [
+                'profile' => $profile
+            ]);
+        }else{
+            return inertia::render('profile',[
+                'profile' => null
+            ]);
+        }
     }
 
     public function profileEditShow(){
-        $profile = profile::first();
-        return response()->json($profile);
 
+        $profile = profile::where('id', Auth::user()->id)->first();
+
+        if($profile){
+            return response()->json($profile);
+        }
     }
 
     public function userBioSimpan(Request $request){
 
-        $profile = profile::first();
+        $profile = profile::where('id', Auth::user()->id)->first();
 
         $imageFilename = $request->gambar;
 
@@ -93,13 +103,10 @@ class homeController extends Controller
             $gambar = $profile->gambar;
         }
 
-        if($profile){
-            $profile->update([
-                'gambar' => $gambar,
-                'biodata' => $request->biodata
-            ]);
-        }
-
+        profile::updateOrCreate(['id' => Auth::user()->id], [
+            'gambar' => $gambar,
+            'biodata' => $request->biodata
+        ]);
     }
 
     public function userPost(Request $request)

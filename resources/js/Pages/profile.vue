@@ -3,23 +3,33 @@
         <div class="q-mx-xl" style="max-width: 1300px; margin: auto; margin-top: 13%;">
             <q-card flat class="row q-gutter">
                 <q-card-section class="col text-center">
-                    <p v-html="profile.biodata"></p>
+                    <p v-if="profile" v-html="profile.biodata" class="text-left" ></p>
                 </q-card-section>
                 <div class="col text-center">
                     <img
+                    v-if="profile"
                         style="width: 70%"
                         :src="/storage/ + profile.gambar"
                         alt="tau"
                     />
                 </div>
             </q-card>
-            <q-btn
-                v-if="$page.props.auth.user"
+            <div v-if="$page.props.auth.user">
+                <q-btn
+                v-if="profile"
                 label="edit Biodata"
                 color="primary"
                 class="q-mx-xs q-mt-xl"
                 @click="edit"
-            />
+                />
+                <q-btn
+                v-else
+                    label="tambah Biodata"
+                    color="primary"
+                    class="q-mx-xs q-mt-xl"
+                    @click="edit"
+                />
+            </div>
         </div>
         <q-dialog
             v-model="dialogProfile"
